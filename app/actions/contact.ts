@@ -51,7 +51,10 @@ export async function submitContactForm(formData: FormData) {
     await resend.emails.send({
       // IMPORTANTE: Substitua 'contato@scsolucoes.com' pelo seu domínio verificado no Resend.
       // Se você ainda não verificou um domínio, pode usar 'onboarding@resend.dev' temporariamente.
-      from: "SC Soluções Energéticas <contato@scsolucoes.com>",
+      // Altere a linha `from:` para usar o email padrão do Resend temporariamente.
+      // Isso garante que o envio funcione mesmo sem um domínio verificado.
+      // Lembre-se de verificar seu domínio no Resend para usar um email personalizado no futuro.
+      from: "SC Soluções Energéticas <onboarding@resend.dev>",
       to: ["engjoaovictor@yahoo.com"],
       subject: `🔋 Nova Solicitação de Orçamento - ${name}`,
       html: `
@@ -129,7 +132,7 @@ export async function submitContactForm(formData: FormData) {
     await resend.emails.send({
       // IMPORTANTE: Substitua 'contato@scsolucoes.com' pelo seu domínio verificado no Resend.
       // Se você ainda não verificou um domínio, pode usar 'onboarding@resend.dev' temporariamente.
-      from: "SC Soluções Energéticas <contato@scsolucoes.com>",
+      from: "SC Soluções Energéticas <onboarding@resend.dev>",
       to: [email],
       subject: "✅ Solicitação Recebida - SC Soluções Energéticas",
       html: `
