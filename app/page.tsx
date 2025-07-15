@@ -104,9 +104,12 @@ export default function HomePage() {
                   size="lg"
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-green-600 bg-transparent"
+                  asChild
                 >
-                  Ver Projetos
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <Link href="/projetos">
+                    Ver Projetos
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
                 </Button>
               </div>
             </div>
