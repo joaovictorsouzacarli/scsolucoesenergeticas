@@ -4,11 +4,15 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Phone, Mail, MessageCircle, Clock, Award } from "lucide-react"
+import { Phone, Mail, MessageCircle, Clock, Award, CheckCircle, AlertCircle } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useActionState } from "react"
+import { submitContactForm } from "../actions/contact"
 
 export default function ContatoPage() {
+  const [state, action, isPending] = useActionState(submitContactForm, null)
+
   const whatsappNumber = "5514991427870"
   const whatsappMessage = "Olá! Gostaria de solicitar um orçamento para projeto de energia solar."
 
@@ -190,46 +194,74 @@ export default function ContatoPage() {
                   <p className="text-gray-600">Preencha o formulário abaixo e entraremos em contato em breve</p>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
-                      <Input placeholder="Seu nome completo" />
+                  {/* Success/Error Message */}
+                  {state && (
+                    <div
+                      className={`p-4 rounded-lg flex items-start space-x-3 ${
+                        state.success ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"
+                      }`}
+                    >
+                      {state.success ? (
+                        <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                      ) : (
+                        <AlertCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
+                      )}
+                      <p className={`text-sm ${state.success ? "text-green-800" : "text-red-800"}`}>{state.message}</p>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Telefone *</label>
-                      <Input placeholder="(00) 00000-0000" />
+                  )}
+
+                  <form action={action} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
+                        <Input name="name" placeholder="Seu nome completo" required />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Telefone *</label>
+                        <Input name="phone" placeholder="(00) 00000-0000" required />
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
-                    <Input type="email" placeholder="seu@email.com" />
-                  </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
+                      <Input name="email" type="email" placeholder="seu@email.com" required />
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Projeto</label>
-                    <select className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                      <option>Selecione o tipo de projeto</option>
-                      <option>Microgeração (Residencial/Comercial até 75kW)</option>
-                      <option>Minigeração (75kW a 5MW)</option>
-                      <option>Consultoria Técnica</option>
-                      <option>Projeto de Subestação</option>
-                      <option>Estudo de Proteção</option>
-                      <option>Simulação 3D</option>
-                    </select>
-                  </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Projeto</label>
+                      <select
+                        name="projectType"
+                        className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      >
+                        <option value="">Selecione o tipo de projeto</option>
+                        <option value="microgeracao">Microgeração (Residencial/Comercial até 75kW)</option>
+                        <option value="minigeracao">Minigeração (75kW a 5MW)</option>
+                        <option value="consultoria">Consultoria Técnica</option>
+                        <option value="subestacao">Projeto de Subestação</option>
+                        <option value="protecao">Estudo de Proteção</option>
+                        <option value="simulacao">Simulação 3D</option>
+                      </select>
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
-                    <Textarea
-                      placeholder="Descreva seu projeto, localização, potência desejada e outras informações relevantes..."
-                      rows={4}
-                    />
-                  </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem *</label>
+                      <Textarea
+                        name="message"
+                        placeholder="Descreva seu projeto, localização, potência desejada e outras informações relevantes..."
+                        rows={4}
+                        required
+                      />
+                    </div>
 
-                  <Button className="w-full bg-green-600 hover:bg-green-700 text-lg py-3" size="lg">
-                    Enviar Solicitação
-                  </Button>
+                    <Button
+                      type="submit"
+                      disabled={isPending}
+                      className="w-full bg-green-600 hover:bg-green-700 text-lg py-3"
+                      size="lg"
+                    >
+                      {isPending ? "Enviando..." : "Enviar Solicitação"}
+                    </Button>
+                  </form>
 
                   <div className="text-center">
                     <p className="text-sm text-gray-500 mb-3">Ou entre em contato diretamente:</p>
