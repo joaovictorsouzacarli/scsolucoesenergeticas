@@ -92,7 +92,7 @@ export default function HomePage() {
               <Badge className="mb-4 bg-white/20 text-white border-white/30">Formado pela UNESP</Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Projetos de Energia Solar com Foco em Segurança</h1>
               <p className="text-xl mb-8 text-blue-100">
-                Mais de 4 anos de experiência e +3500 projetos executados. Especialista em microgeração, minigeração e
+                Mais de 5 anos de experiência e +3500 projetos executados. Especialista em microgeração, minigeração e
                 projetos executivos.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
