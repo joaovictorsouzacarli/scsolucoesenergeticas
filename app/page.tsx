@@ -96,9 +96,11 @@ export default function HomePage() {
                 projetos executivos.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100">
-                  <Phone className="mr-2 h-5 w-5" />
-                  (14) 99142-7870
+                <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100" asChild>
+                  <Link href="https://wa.me/5514991427870?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20projeto%20de%20energia%20solar.">
+                    <Phone className="mr-2 h-5 w-5" />
+                    (14) 99142-7870
+                  </Link>
                 </Button>
                 <Button
                   size="lg"
