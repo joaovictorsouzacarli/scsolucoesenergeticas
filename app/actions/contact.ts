@@ -2,7 +2,9 @@
 
 import { Resend } from "resend"
 
-const resend = new Resend("re_XMXsC2iq_5XwFPoeWfVKghBcha3hJzDxcE")
+// Use a variável de ambiente para a chave da API do Resend
+// Certifique-se de configurar RESEND_API_KEY no Vercel
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function submitContactForm(formData: FormData) {
   // Simular delay de processamento
@@ -47,7 +49,9 @@ export async function submitContactForm(formData: FormData) {
   try {
     // Enviar email para o engenheiro
     await resend.emails.send({
-      from: "onboarding@resend.dev", // Email padrão do Resend que funciona imediatamente
+      // IMPORTANTE: Substitua 'contato@scsolucoes.com' pelo seu domínio verificado no Resend.
+      // Se você ainda não verificou um domínio, pode usar 'onboarding@resend.dev' temporariamente.
+      from: "SC Soluções Energéticas <contato@scsolucoes.com>",
       to: ["engjoaovictor@yahoo.com"],
       subject: `🔋 Nova Solicitação de Orçamento - ${name}`,
       html: `
@@ -123,7 +127,9 @@ export async function submitContactForm(formData: FormData) {
 
     // Enviar email de confirmação para o cliente
     await resend.emails.send({
-      from: "onboarding@resend.dev", // Email padrão do Resend
+      // IMPORTANTE: Substitua 'contato@scsolucoes.com' pelo seu domínio verificado no Resend.
+      // Se você ainda não verificou um domínio, pode usar 'onboarding@resend.dev' temporariamente.
+      from: "SC Soluções Energéticas <contato@scsolucoes.com>",
       to: [email],
       subject: "✅ Solicitação Recebida - SC Soluções Energéticas",
       html: `
