@@ -4,15 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Phone, Mail, MessageCircle, Clock, Award, CheckCircle, AlertCircle } from "lucide-react"
+import { Phone, Mail, MessageCircle, Clock, Award } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useActionState } from "react"
-import { submitContactForm } from "../actions/contact"
 
 export default function ContatoPage() {
-  const [state, action, isPending] = useActionState(submitContactForm, null)
-
   const whatsappNumber = "5514991427870"
   const whatsappMessage = "Olá! Gostaria de solicitar um orçamento para projeto de energia solar."
 
@@ -194,23 +190,14 @@ export default function ContatoPage() {
                   <p className="text-gray-600">Preencha o formulário abaixo e entraremos em contato em breve</p>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  {/* Success/Error Message */}
-                  {state && (
-                    <div
-                      className={`p-4 rounded-lg flex items-start space-x-3 ${
-                        state.success ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"
-                      }`}
-                    >
-                      {state.success ? (
-                        <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      ) : (
-                        <AlertCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
-                      )}
-                      <p className={`text-sm ${state.success ? "text-green-800" : "text-red-800"}`}>{state.message}</p>
-                    </div>
-                  )}
-
-                  <form action={action} className="space-y-6">
+                  <form action="https://formspree.io/f/myzpgrzd" method="POST" className="space-y-6">
+                    {/* Adicione estes campos ocultos DENTRO da tag <form> */}
+                    <input
+                      type="hidden"
+                      name="_subject"
+                      value="Nova Solicitação de Orçamento - SC Soluções Energéticas"
+                    />
+                    <input type="hidden" name="_replyto" value="" /> {/* Captura o email do remetente */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
@@ -221,12 +208,10 @@ export default function ContatoPage() {
                         <Input name="phone" placeholder="(00) 00000-0000" required />
                       </div>
                     </div>
-
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
                       <Input name="email" type="email" placeholder="seu@email.com" required />
                     </div>
-
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Projeto</label>
                       <select
@@ -242,7 +227,6 @@ export default function ContatoPage() {
                         <option value="simulacao">Simulação 3D</option>
                       </select>
                     </div>
-
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem *</label>
                       <Textarea
@@ -252,14 +236,8 @@ export default function ContatoPage() {
                         required
                       />
                     </div>
-
-                    <Button
-                      type="submit"
-                      disabled={isPending}
-                      className="w-full bg-green-600 hover:bg-green-700 text-lg py-3"
-                      size="lg"
-                    >
-                      {isPending ? "Enviando..." : "Enviar Solicitação"}
+                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-lg py-3" size="lg">
+                      Enviar Solicitação
                     </Button>
                   </form>
 
