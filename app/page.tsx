@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, Phone, Mail, Award, Shield, Zap, Users, CheckCircle, ArrowRight, Play, ExternalLink } from "lucide-react"
+import { Star, Phone, Mail, Award, Shield, Zap, Users, CheckCircle, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
@@ -27,6 +27,18 @@ export default function HomePage() {
       company: "Empresa Parceira",
       text: "Sempre muito pratico e rápido devido ao seus projetos serem 100% personalizado e elaborando conforme a instalação. Chegar pra instalar e saber de que forma será instalado é uma grande vantagem, tendo em vista que atendo mais de 10 empresas hoje com prestação de serviço é somente com a SC que temos todo suporte e projeto 100% personalizado.",
       rating: 5,
+    },
+    {
+      name: "LB ENERGY",
+      company: "Parceiro",
+      text: "Tenho orgulho em dizer que desde os primeiros passos da LB ENERGY, tivemos a SC Soluções Energéticas como um dos pilares de qualidade técnica dos nossos projetos. Hoje nos sentimos confiantes em dizer que definitivamente foram a nossa melhor escolha e decisivos no nosso crescimento e posicionamento de mercado.",
+      rating: 5, // Assumindo 5 estrelas, ajuste se necessário
+    },
+    {
+      name: "Sumar Solar",
+      company: "Parceiro",
+      text: "A Sumar solar vem aqui agradecer pelos projetos elaborado pela SC soluções energéticas.",
+      rating: 5, // Assumindo 5 estrelas, ajuste se necessário
     },
   ]
 
@@ -212,44 +224,14 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl p-8">
-                <div
-                  className="relative w-full h-96 bg-gradient-to-br from-green-600 to-blue-600 rounded-lg shadow-lg cursor-pointer group overflow-hidden"
-                  onClick={handleVideoClick}
-                >
-                  {/* Background Pattern */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=500')] bg-cover bg-center"></div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative h-full flex flex-col items-center justify-center text-white p-6">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Play className="h-12 w-12 text-white" fill="currentColor" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-center mb-3">
-                      "Não é sobre fazer projetos,
-                      <br />é sobre realizar sonhos!"
-                    </h3>
-
-                    <p className="text-blue-100 text-center mb-4 max-w-sm">
-                      Assista nosso vídeo 3D e descubra nossa paixão por energia solar
-                    </p>
-
-                    <div className="flex items-center space-x-2 text-sm text-blue-100 group-hover:text-white transition-colors">
-                      <ExternalLink className="h-4 w-4" />
-                      <span>Clique para assistir</span>
-                    </div>
-                  </div>
-
-                  {/* Hover Effect */}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-
-                <div className="text-center mt-4">
-                  <p className="text-gray-600 text-sm">Vídeo demonstrativo da nossa filosofia e qualidade técnica</p>
-                </div>
+              <div className="flex items-center justify-center bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl p-8 h-96">
+                <Image
+                  src="/logo.png"
+                  alt="SC Soluções Energéticas Logo"
+                  width={250}
+                  height={250}
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
